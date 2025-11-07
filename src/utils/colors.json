@@ -1,0 +1,16 @@
+{
+  "background_color": "#F4F7FE",       
+  "login_background": "#E6F0FF", 
+  "company_color": "#2B3A67",
+  "active_menu_color": "#4C8CFF", 
+  "accent_color": "#4C8CFF", 
+  "text_primary": "#333333",
+  "text_secondary": "#666F8F",
+  "text_inverse": "#FFFFFF", 
+  "border_color": "#D9E1F2", 
+  "hover_color": "#3A6FDB",
+  "success_color": "#28A745",
+  "error_color": "#DC3545",
+  "warning_color": "#FFC107",
+  "info_color": "#17A2B8"
+}

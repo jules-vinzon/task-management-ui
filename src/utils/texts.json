@@ -1,0 +1,21 @@
+{
+  "head_title_sign": "Task Management",
+  "signin_header": "Task Management",
+  "signin_header_content1": "Stay on Top of Your Work. Sign in to organize, track, and complete your tasks",
+  "signin_label_username": "Username",
+  "signin_label_password": "Password",
+  "signin_label_email_username": "Username or Email",
+  "signin_label_forgot_password": "Forgot Password?",
+  "signin_label_email_username_required_message": "Please input your username or email.",
+  "signin_label_password_required_message": "Please input your password.",
+  "signin_label_username_invalid_message": "Invalid username.",
+  "signin_label_email_invalid_message": "Invalid email.",
+  "signin_label_button": "Sign In",
+
+  "home_label_tasks_title": "Task Title",
+  "home_label_task_title_required_message": "Please enter task title.",
+  "home_label_tasks_desk": "Task Description",
+  "home_label_task_desc_required_message": "Please enter task description.",
+
+  "topbar_menu_list_logout": "Logout"
+}
