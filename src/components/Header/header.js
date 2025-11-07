@@ -4,8 +4,8 @@ import HeaderStyles from "./header.styles";
 import { Popover, Typography } from "antd";
 import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import TopbarDropdownWrapper from "./headerDropdown.styles";
-import MenuList from "../../components/MenuList/menuList";
-import texts from "../../utils/texts.json";
+import MenuList from "components/MenuList/menuList";
+import texts from "utils/texts.json";
 import authAction from "../../redux/auth/actions.js";
 import { useNavigate } from "react-router-dom";
 

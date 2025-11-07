@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import Styles from "./signin.styles"; // reuse same styles for consistency
 import { Layout, Form, Button } from "antd";
-import FormItemInput from "../../components/Input/formItemInput";
-import texts from "../../utils/texts.json";
-import Logo from "../../assets/task-management-logo.png";
+import FormItemInput from "components/Input/formItemInput";
+import texts from "utils/texts.json";
+import Logo from "assets/task-management-logo.png";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import authAction from "../../redux/auth/actions.js";

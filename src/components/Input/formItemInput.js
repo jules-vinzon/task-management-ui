@@ -1,9 +1,9 @@
 import React from "react";
 import InputStyle from "./formItemInput.styles.js";
 import { Input, Form } from "antd";
-import { getValidation } from "../../utils/inputValidation.js";
+import { getValidation } from "utils/inputValidation.js";
 
-export default function (props) {
+export default function FormItemInput (props) {
   const defaultContainerStyle = {
     display: "flex",
     flexDirection: "column",

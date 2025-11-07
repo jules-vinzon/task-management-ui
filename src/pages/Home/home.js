@@ -12,13 +12,13 @@ import {
   Spin,
 } from "antd";
 import HomePageStyles from "./home.styles";
-import StatusSelect from "../../components/StatusSelect/statusSelect";
+import StatusSelect from "components/StatusSelect/statusSelect";
 import tasksAction from "../../redux/tasks/actions.js";
-import FormItemInput from "../../components/Input/formItemInput";
-import texts from "../../utils/texts.json";
-import useAuth from "../../utils/authChecker.js";
+import FormItemInput from "components/Input/formItemInput";
+import texts from "utils/texts.json";
+import useAuth from "utils/authChecker.js";
 import authAction from "../../redux/auth/actions.js";
-import CustomHeader from "../../components/Header/header.js";
+import CustomHeader from "components/Header/header.js";
 
 const { Content } = Layout;
 const { Option } = Select;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import colors from "../../utils/colors.json";
+import colors from "utils/colors.json";
 
 const HeaderStyles = styled.header`
   background: ${colors.company_color};

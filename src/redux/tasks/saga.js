@@ -1,6 +1,6 @@
 import { all, takeEvery, fork, put, select } from "redux-saga/effects";
 
-import { get, post, PUT } from "../../utils/apiRequestor";
+import { get, post, PUT } from "utils/apiRequestor";
 import actions from "./actions";
 
 export function* fetchTasks() {

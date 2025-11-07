@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import colors from "../../utils/colors.json";
+import colors from "utils/colors.json";
 
 const HomePageStyles = styled.div`
   font-family: "Inter", "Segoe UI", "Helvetica Neue", Arial, sans-serif;

@@ -1,7 +1,7 @@
 import { all, takeEvery, fork, put, call } from "redux-saga/effects";
 
-import { post, fetchWithForbidden } from "../../utils/apiRequestor";
-import { encryptRequest } from "../../utils/encryptor.js";
+import { post, fetchWithForbidden } from "utils/apiRequestor";
+import { encryptRequest } from "utils/encryptor.js";
 import actions from "./actions";
 
 let headers = {
