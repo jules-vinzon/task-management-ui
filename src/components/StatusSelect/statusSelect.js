@@ -1,14 +1,15 @@
 import React from "react";
 import { Select } from "antd";
 import StatusSelectStyles from "./statusSelect.styles.js";
+import colors from "utils/colors.json";
 
 const { Option } = Select;
 
 // Default status colors
 const statusColor = {
-  Pending: "#ffa940",
-  Ongoing: "#40a9ff",
-  Completed: "#73d13d",
+  Pending: colors.pending_color,
+  Ongoing: colors.ongoing_color,
+  Completed: colors.completed_color,
 };
 
 const StatusSelect = ({ value, onChange, options = ["Pending", "Ongoing", "Completed"], colors = statusColor }) => {

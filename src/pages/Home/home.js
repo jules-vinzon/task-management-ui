@@ -19,6 +19,7 @@ import texts from "utils/texts.json";
 import useAuth from "utils/authChecker.js";
 import authAction from "../../redux/auth/actions.js";
 import CustomHeader from "components/Header/header.js";
+import colors from "utils/colors.json";
 
 const { Content } = Layout;
 const { Option } = Select;
@@ -137,7 +138,7 @@ const HomePage = () => {
 
   if (!loginData) {
     return (
-      <Layout style={{ minHeight: "100vh", background: "#f0f2f5" }}>
+      <Layout style={{ minHeight: "100vh", background: colors.light_background }}>
         <Spin
           tip="Loading user data..."
           size="large"
@@ -154,7 +155,7 @@ const HomePage = () => {
 
   return (
     <HomePageStyles>
-      <Layout style={{ minHeight: "100vh", background: "#f0f2f5" }}>
+      <Layout style={{ minHeight: "100vh", background: colors.light_background }}>
         <CustomHeader />
         <Content style={{ padding: "0 32px" }}>
           <Card

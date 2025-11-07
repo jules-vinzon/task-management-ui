@@ -36,7 +36,7 @@ const HomePageStyles = styled.div`
   }
 
   .customRow:hover {
-    background-color: #e8f0ff !important;
+    background-color: ${colors.highlight_blue} !important;
   }
 
   .ant-table-thead > tr > th {
