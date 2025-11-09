@@ -4,18 +4,22 @@ import { useSelector, useDispatch } from "react-redux";
 import AuthAction from "../redux/auth/actions";
 import { useNavigate } from "react-router-dom";
 
-const { refetchAuth } = AuthAction;
+const { refetchAuth, logout } = AuthAction;
 
 const useAuth = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { status } = useSelector((state) => state.Auth);
+  const { tokenError } = useSelector((state) => state.Tasks);
+
+  console.log("tokenError", tokenError)
 
   useEffect(() => {
     const token = localStorage.getItem("idToken");
     
-    if (!token) {
+    if (!token || (tokenError && tokenError === "Invalid credentials")) {
       navigate("/signin");
+      dispatch(logout()); 
       return;
     }
 
@@ -23,8 +27,8 @@ const useAuth = () => {
 
     if (status === "idle") {
       dispatch(refetchAuth);
-    }
-  }, [dispatch, status, navigate]);
+    }    
+  }, [dispatch, status, navigate, tokenError]);
 };
 
 export default useAuth;

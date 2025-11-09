@@ -11,7 +11,7 @@ import authAction from "../../redux/auth/actions.js";
 const { Content } = Layout;
 const { login } = authAction;
 
-export default function SigninPage( ) {
+export default function SigninPage() {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -19,6 +19,8 @@ export default function SigninPage( ) {
   const { loginSuccess, isLoggingIn, loginErrorMessage } = useSelector(
     (state) => state.Auth
   );
+
+  const { tokenError } = useSelector((state) => state.Tasks);
 
   useEffect(() => {
     if (loginSuccess) {
@@ -61,13 +63,13 @@ export default function SigninPage( ) {
 
                 <div
                   className={
-                    loginErrorMessage
+                    loginErrorMessage || tokenError
                       ? "signin-failed-header-content"
                       : "signin-header-content"
                   }
                 >
-                  {loginErrorMessage
-                    ? loginErrorMessage
+                  {loginErrorMessage || tokenError
+                    ? loginErrorMessage || tokenError
                     : texts.signin_header_content1}
                 </div>
 

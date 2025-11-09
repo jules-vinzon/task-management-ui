@@ -1,4 +1,5 @@
 import actions from "./actions";
+import authActions from "../auth/actions";
 
 const initialState = {
   tasksData: null,
@@ -11,6 +12,7 @@ const initialState = {
   deleteTaskSuccess: false,
   isUpdatingTask: false,
   updateTaskSuccess: false,
+  tokenError: null,
 };
 
 export default function authReducer(state = initialState, action) {
@@ -33,6 +35,13 @@ export default function authReducer(state = initialState, action) {
         ...state,
         fetchTasksSuccess: false,
         isFetchingTasks: false,
+        tokenError: action.tokenError,
+      };
+
+    case authActions.LOG_IN_SUCCESS:
+      return {
+        ...state,
+        tokenError: null,
       };
     case actions.ADDING_TASK:
       return {

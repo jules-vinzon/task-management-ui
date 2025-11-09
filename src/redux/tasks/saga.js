@@ -1,7 +1,13 @@
 import { all, takeEvery, fork, put, select } from "redux-saga/effects";
 
-import { get, post, PUT } from "utils/apiRequestor";
+import { get, post, PUT, fetchWithForbidden } from "utils/apiRequestor";
 import actions from "./actions";
+
+let headers = {
+  Accept: "application/json",
+  "Content-Type": "application/json",
+  token: localStorage.getItem("idToken"),
+};
 
 export function* fetchTasks() {
   yield takeEvery("FETCH_TASKS", function* ({ payload }) {
@@ -14,19 +20,23 @@ export function* fetchTasks() {
       });
 
       const apiResponse = yield fetchTasksApi(payload);
-      const resData = yield apiResponse.json();
-      console.log("[FETCH_TASKS][SAGA]: CHECK RESPONSE", resData);
+      console.log("[FETCH_TASKS][SAGA]: CHECK RESPONSE", apiResponse);
 
       if (apiResponse.status >= 200 && apiResponse.status < 300) {
         yield put({
           type: actions.FETCH_TASKS_SUCCESS,
-          tasksData: resData,
+          tasksData: apiResponse.data,
+        });
+      } else if (apiResponse.status === 401) {
+        yield put({
+          type: actions.FETCH_TASKS_FAILURE,
+          loginSuccess: false,
+          tokenError: "Invalid credentials",
         });
       } else {
         yield put({
           type: actions.FETCH_TASKS_FAILURE,
-          loginSuccess: false,
-          error: resData.error,
+          error: apiResponse.data.error,
         });
       }
     } catch (e) {
@@ -50,10 +60,7 @@ export function* addTasks() {
       });
 
       const apiResponse = yield addTasksApi(payload);
-      console.log("[ADD_TASK][SAGA]: CHECK RESPONSE", apiResponse);
-
-      const resData = yield apiResponse.json();
-      console.log("[ADD_TASK][SAGA]: CHECK PARSED RESPONSE", resData);
+      console.log(" ", apiResponse);
 
       const state = yield select();
 
@@ -72,10 +79,15 @@ export function* addTasks() {
           type: actions.FETCH_TASKS,
           payload: fetchingParams,
         });
+      } else if (apiResponse.status === 401) {
+        yield put({
+          type: actions.ADD_TASK_FAILURE,
+          tokenError: "Invalid credentials",
+        });
       } else {
         yield put({
           type: actions.ADD_TASK_FAILURE,
-          error: resData.error,
+          error: "Failed to add task.",
         });
       }
     } catch (e) {
@@ -101,9 +113,6 @@ export function* deleteTasks() {
       const apiResponse = yield deleteTasksApi(payload);
       console.log("[DELETE_TASK][SAGA]: CHECK RESPONSE", apiResponse);
 
-      const resData = yield apiResponse.json();
-      console.log("[DELETE_TASK][SAGA]: CHECK PARSED RESPONSE", resData);
-
       const state = yield select();
 
       const fetchingParams = state.Tasks.fetchingParams;
@@ -121,10 +130,15 @@ export function* deleteTasks() {
           type: actions.FETCH_TASKS,
           payload: fetchingParams,
         });
+      } else if (apiResponse.status === 401) {
+        yield put({
+          type: actions.DELETE_TASK_FAILURE,
+          tokenError: "Invalid credentials",
+        });
       } else {
         yield put({
           type: actions.DELETE_TASK_FAILURE,
-          error: resData.error,
+          error: "Failed to delete task/s.",
         });
       }
     } catch (e) {
@@ -150,9 +164,6 @@ export function* updateTask() {
       const apiResponse = yield updateTaskApi(payload);
       console.log("[UPDATE_TASK][SAGA]: CHECK RESPONSE", apiResponse);
 
-      const resData = yield apiResponse.json();
-      console.log("[UPDATE_TASK][SAGA]: CHECK PARSED RESPONSE", resData);
-
       const state = yield select();
 
       const fetchingParams = state.Tasks.fetchingParams;
@@ -170,17 +181,21 @@ export function* updateTask() {
           type: actions.FETCH_TASKS,
           payload: fetchingParams,
         });
+      } else if (apiResponse.status === 401) {
+        yield put({
+          type: actions.UPDATE_TASK_FAILURE,
+          tokenError: "Invalid credentials",
+        });
       } else {
         yield put({
           type: actions.UPDATE_TASK_FAILURE,
-          error: resData.error,
+          error: "Failed to update task.",
         });
       }
     } catch (e) {
       console.log("[UPDATE_TASK][SAGA]: INTERNAL ERROR", e);
       yield put({
         type: actions.UPDATE_TASK_FAILURE,
-        loginSuccess: false,
         error: "There was an internal error. Please try again later.",
       });
     }
@@ -188,19 +203,34 @@ export function* updateTask() {
 }
 
 function fetchTasksApi(payload) {
-  return get(`tasks/${payload.user_id}`);
+  return fetchWithForbidden(`tasks/${payload.user_id}`, {
+    headers,
+    method: "GET",
+  });
 }
 
 function addTasksApi(payload) {
-  return post(`tasks/`, payload);
+  return fetchWithForbidden(`tasks/`, {
+    headers,
+    method: "POST",
+    data: payload,
+  });
 }
 
 function deleteTasksApi(payload) {
-  return post(`tasks/delete`, payload);
+  return fetchWithForbidden(`tasks/delete`, {
+    headers,
+    method: "POST",
+    data: payload,
+  });
 }
 
 function updateTaskApi(payload) {
-  return PUT(`tasks/${payload.task_id}`, payload);
+  return fetchWithForbidden(`tasks/${payload.task_id}`, {
+    headers,
+    method: "PUT",
+    data: payload,
+  });
 }
 
 export default function* rootSaga() {
