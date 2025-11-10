@@ -45,7 +45,7 @@ The app will be available at http://localhost:3000
 
 - **User Authentication:** Login, register, refetch, and logout using encrypted credentials and JWT
 - **Task Management:** Create, view, update, and delete tasks
-- **Task Listing:** Tasks are filtered by logged-in user and sorted by creation date
+- **Task Listing:** Tasks are filtered by logged-in user and sorted by the task status so that **non-completed tasks appear before completed ones**
 - **Responsive UI:** Built to adapt to different screen sizes
 
 <h2>Assumptions Made</h2>
