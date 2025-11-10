@@ -1,70 +1,63 @@
-# Getting Started with Create React App
+<h1>Task Management UI</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h2>Setup Instructions</h2>
 
-## Available Scripts
+<h3>Prerequisites</h3>
 
-In the project directory, you can run:
+- Node.js (version 16+ recommended)
+- npm or yarn
+- Access to a running Task Management API backend
 
-### `yarn start`
+<h3>Installation</h3>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**1.** Clone the repository:
+```
+git clone https://github.com/jules-vinzon/task-management-ui.git
+cd task-management-ui
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**2.** Install dependencies:
+```
+npm install
+# or
+yarn install
+```
 
-### `yarn test`
+**3.** Create a **.env** file in the root (if needed) and set the API base URL:
+```
+REACT_APP_API_URL=http://localhost:5000/api
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**4.** Start the development server:
+```
+npm run dev
+# or
+yarn run dev
+```
+The app will be available at http://localhost:3000
 
-### `yarn build`
+<h2>Available Scripts</h2>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- ```yarn start``` / ```npm start```: Launches development server
+- ```yarn build``` / ```npm run build```: Builds production-ready bundle in build/
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<h2>Features</h2>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **User Authentication:** Login, register, refetch, and logout using encrypted credentials and JWT
+- **Task Management:** Create, view, update, and delete tasks
+- **Task Listing:** Tasks are filtered by logged-in user and sorted by creation date
+- **Responsive UI:** Built to adapt to different screen sizes
 
-### `yarn eject`
+<h2>Assumptions Made</h2>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. The UI interacts with the Task Management API at ```REACT_APP_API_URL```.
+2. All requests requiring authentication include a JWT token stored in local storage or state.
+3. API errors are returned in JSON and handled gracefully in the UI.
+4. The UI assumes tasks have ```title```, ```description```, ```status```, and ```owner_id```.
+5. User registration/login uses the RSA public key provided by ```/auth/get-key``` endpoint for encryption.
+6. No offline mode or caching is implemented (all data comes from live API requests).
+7. The app is bootstrapped with **Create React App**, so standard CRA scripts apply.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
