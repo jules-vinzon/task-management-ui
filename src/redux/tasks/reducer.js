@@ -38,6 +38,15 @@ export default function authReducer(state = initialState, action) {
         tokenError: action.tokenError,
       };
 
+    case actions.RESET_TASKS:
+      return {
+        ...state,
+        tasksData: null,
+        fetchTasksSuccess: false,
+        isAddingTask: false,
+        addTaskSuccess: false,
+      };
+
     case authActions.LOG_IN_SUCCESS:
       return {
         ...state,

@@ -72,6 +72,7 @@ export default function authReducer(state = initialState, action) {
         kickedOut: true,
         loginSuccess: false,
         loginErrorMessage: null,
+        loginData: null
       };
     default:
       return state;

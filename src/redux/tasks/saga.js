@@ -3,11 +3,14 @@ import { all, takeEvery, fork, put, select } from "redux-saga/effects";
 import { get, post, PUT, fetchWithForbidden } from "utils/apiRequestor";
 import actions from "./actions";
 
-let headers = {
-  Accept: "application/json",
-  "Content-Type": "application/json",
-  token: localStorage.getItem("idToken"),
-};
+function getHeaders() {
+  return {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+    token: localStorage.getItem("idToken"),
+  };
+}
+
 
 export function* fetchTasks() {
   yield takeEvery("FETCH_TASKS", function* ({ payload }) {
@@ -204,14 +207,14 @@ export function* updateTask() {
 
 function fetchTasksApi(payload) {
   return fetchWithForbidden(`tasks/${payload.user_id}`, {
-    headers,
+    headers: getHeaders(),
     method: "GET",
   });
 }
 
 function addTasksApi(payload) {
   return fetchWithForbidden(`tasks/`, {
-    headers,
+    headers: getHeaders(),
     method: "POST",
     data: payload,
   });
@@ -219,7 +222,7 @@ function addTasksApi(payload) {
 
 function deleteTasksApi(payload) {
   return fetchWithForbidden(`tasks/delete`, {
-    headers,
+    headers: getHeaders(),
     method: "POST",
     data: payload,
   });
@@ -227,7 +230,7 @@ function deleteTasksApi(payload) {
 
 function updateTaskApi(payload) {
   return fetchWithForbidden(`tasks/${payload.task_id}`, {
-    headers,
+    headers: getHeaders(),
     method: "PUT",
     data: payload,
   });

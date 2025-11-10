@@ -38,30 +38,30 @@ const HomePage = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [form] = Form.useForm();
 
-  // Refetch auth if no login data
   useEffect(() => {
     if (!loginData) {
       dispatch(refetchAuth());
     }
   }, [loginData, dispatch]);
 
-  // Fetch tasks once loginData is ready
   useEffect(() => {
     if (loginData?.user?.id) {
-      if (!fetchTasksSuccess && !tasksData) {
-        dispatch(fetchTasks({ user_id: loginData.user.id }));
-      } else if (fetchTasksSuccess && tasksData) {
-        setTasks(tasksData);
-      }
+      setTasks([]);
+      dispatch(fetchTasks({ user_id: loginData.user.id }));
     }
-  }, [fetchTasksSuccess, tasksData, dispatch, loginData?.user?.id]);
+  }, [loginData?.user?.id, dispatch]);
 
-  // Success message for add task
   useEffect(() => {
     if (addTaskSuccess) {
       message.success("Task added successfully!");
     }
   }, [addTaskSuccess]);
+
+  useEffect(() => {
+    if (tasksData) {
+      setTasks(tasksData);
+    }
+  }, [tasksData]);
 
   const handleStatusChange = (value, taskId) => {
     dispatch(
@@ -138,7 +138,9 @@ const HomePage = () => {
 
   if (!loginData) {
     return (
-      <Layout style={{ minHeight: "100vh", background: colors.light_background }}>
+      <Layout
+        style={{ minHeight: "100vh", background: colors.light_background }}
+      >
         <Spin
           tip="Loading user data..."
           size="large"
@@ -155,7 +157,9 @@ const HomePage = () => {
 
   return (
     <HomePageStyles>
-      <Layout style={{ minHeight: "100vh", background: colors.light_background }}>
+      <Layout
+        style={{ minHeight: "100vh", background: colors.light_background }}
+      >
         <CustomHeader />
         <Content style={{ padding: "0 32px" }}>
           <Card
