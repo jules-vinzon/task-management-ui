@@ -8,6 +8,10 @@ export const getValidation = (method, value) => {
             method: 'username',
             regex: /[^A-Za-z0-9._]/.test(value),
         },
+        {
+            method: 'none',
+            regex: true,
+        }
     ];
     if (method) {
         console.log('METHOD', method);

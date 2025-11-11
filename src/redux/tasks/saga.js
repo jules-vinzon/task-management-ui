@@ -1,6 +1,6 @@
 import { all, takeEvery, fork, put, select } from "redux-saga/effects";
 
-import { get, post, PUT, fetchWithForbidden } from "utils/apiRequestor";
+import { fetchWithForbidden } from "utils/apiRequestor";
 import actions from "./actions";
 
 function getHeaders() {

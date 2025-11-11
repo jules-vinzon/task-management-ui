@@ -99,7 +99,7 @@ export default function FormItemInput (props) {
               disabled={disabledValue}
               minLength={minLength}
               placeholder={placeholderValue}
-              addonBefore={props.addonBefore}
+              // addonBefore={props.addonBefore}
               size="large"
               style={{ textAlign: "left" }}
               value={inputValue}

@@ -31,7 +31,7 @@ const HomePage = () => {
   useAuth();
 
   const { loginData } = useSelector((state) => state.Auth);
-  const { tasksData, fetchTasksSuccess, isAddingTask, addTaskSuccess } =
+  const { tasksData, isAddingTask, addTaskSuccess } =
     useSelector((state) => state.Tasks);
 
   const [tasks, setTasks] = useState(tasksData);
